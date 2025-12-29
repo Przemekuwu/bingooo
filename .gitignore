@@ -1,0 +1,32 @@
+# Angular
+frontend/dist/
+frontend/.angular/
+frontend/node_modules/
+
+# Node
+backend/node_modules/
+node_modules/
+
+# Vercel
+.vercel/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.production

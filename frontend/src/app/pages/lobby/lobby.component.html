@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let p of players">
+    {{ p.nickname }} <span *ngIf="p.host">⭐</span>
+    <button *ngIf="isHost && !p.host" (click)="kick(p.nickname)">Expulsar</button>
+  </li>
+</ul>

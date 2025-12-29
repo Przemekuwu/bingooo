@@ -1,0 +1,21 @@
+{
+  "name": "bingo-pokemon-vercel",
+  "version": "1.0.0",
+  "description": "Bingo Pokémon multijugador con Angular y Socket.io",
+  "scripts": {
+    "dev": "concurrently \"cd frontend && ng serve\" \"cd backend && npm run dev\"",
+    "build": "cd frontend && npm run build && cd ../backend && npm install",
+    "start": "cd backend && node server.js",
+    "deploy": "vercel --prod",
+    "vercel-build": "npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": ["bingo", "pokemon", "game", "multiplayer"],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}
