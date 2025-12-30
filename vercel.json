@@ -1,38 +1,22 @@
 {
   "version": 2,
+  "buildCommand": "cd frontend && npm run build",
+  "outputDirectory": "frontend/dist/frontend/browser",
+  "installCommand": "cd frontend && npm install",
   "builds": [
     {
-      "src": "backend/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": 50
-      }
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/angular",
-      "config": {
-        "distDir": "dist/frontend/browser"
-      }
+      "src": "backend/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/socket.io/(.*)",
-      "dest": "backend/server.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
-      }
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/server.js"
+      "dest": "backend/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "frontend"
+      "dest": "/index.html"
     }
   ]
 }
