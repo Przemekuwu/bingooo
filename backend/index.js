@@ -2,9 +2,13 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
+
+// Servir archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
 
 const server = http.createServer(app);
 
@@ -176,6 +180,11 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     rooms: Object.keys(rooms).length
   });
+});
+
+// IMPORTANTE: Para todas las demás rutas, servir index.html (SPA de Angular)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
 });
 
 io.on('connection', (socket) => {
@@ -675,4 +684,4 @@ server.listen(PORT, () => {
 });
 
 // Exportar para Vercel
-module.exports = server;"// Update" 
+module.exports = server;
