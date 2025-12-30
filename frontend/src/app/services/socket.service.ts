@@ -57,9 +57,14 @@ export class SocketService {
     });
   }
 
-  // Guardar sesión
-  private saveSession(): void {
-    this.sessionData.lastSaved = new Date().toISOString();
+  // Guardar sesión - AHORA PÚBLICO y CON PARÁMETROS
+  public saveSession(roomCode: string, nickname: string): void {
+    this.sessionData = {
+      roomCode: roomCode,
+      nickname: nickname,
+      playerId: this.getPlayerId(),
+      lastSaved: new Date().toISOString()
+    };
     localStorage.setItem('bingo-session', JSON.stringify(this.sessionData));
     console.log('💾 Sesión guardada:', this.sessionData);
   }
@@ -110,13 +115,8 @@ export class SocketService {
         console.log('✅ Sala creada en servidor:', data.roomCode);
         
         // Guardar sesión
-        this.sessionData = {
-          roomCode: data.roomCode,
-          nickname: nickname,
-          playerId: playerId,
-          isHost: true
-        };
-        this.saveSession();
+        this.saveSession(data.roomCode, nickname);
+        this.sessionData.isHost = true;
         
         resolve(data.roomCode);
       });
@@ -139,13 +139,8 @@ export class SocketService {
         console.log('✅ Unido a sala exitosamente:', roomCode);
         
         // Guardar sesión
-        this.sessionData = {
-          roomCode: roomCode,
-          nickname: nickname,
-          playerId: playerId,
-          isHost: false
-        };
-        this.saveSession();
+        this.saveSession(roomCode, nickname);
+        this.sessionData.isHost = false;
         
         resolve(true);
       });
