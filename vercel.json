@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm run build",
-  "outputDirectory": "frontend/dist/bingooo/browser",
-  "installCommand": "cd frontend && npm install",
   "builds": [
     {
       "src": "backend/index.js",
@@ -18,5 +15,11 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "github": {
+    "silent": true
+  },
+  "buildCommand": "cd frontend && npm run build",
+  "outputDirectory": "frontend/dist/bingooo/browser",
+  "installCommand": "cd frontend && npm install && cd ../backend && npm install"
 }
